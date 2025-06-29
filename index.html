@@ -24,7 +24,9 @@
       max-width: 150px;
       margin-bottom: 15px;
     }
-    h1 { color: #f2a900; }
+    h1 {
+      color: #f2a900;
+    }
     a.button {
       display: inline-block;
       margin: 10px;
@@ -35,8 +37,12 @@
       font-weight: bold;
       border-radius: 4px;
     }
-    a.button:hover { background: #f2c347; }
-    p { font-size: 1.1em; }
+    a.button:hover {
+      background: #f2c347;
+    }
+    p {
+      font-size: 1.1em;
+    }
     .progress-wrapper {
       margin: 20px 0;
       text-align: left;
@@ -62,8 +68,8 @@
 </head>
 <body>
   <div class="container">
-    <!-- LOGO -->
-    <img class="logo" src="NUKEX.svg" alt="Nukex Logo">
+    <!-- Nukex Logo -->
+    <img class="logo" src="nukex-logo.png" alt="Nukex Logo" />
 
     <h1>🚀 Nukex Liquidity Fundraiser</h1>
     <p>We're raising <strong>1 BNB</strong> to create the first PancakeSwap liquidity pool for Nukex!</p>
@@ -71,7 +77,7 @@
     <p>✅ Send your BNB contribution to:</p>
     <code>0x61D23523881E46fD6cD37008aAD55E726F3A828b</code>
 
-    <!-- Progress Bar Section -->
+    <!-- Live Progress Bar -->
     <div class="progress-wrapper">
       <div class="progress-info" id="bnb-amount">Loading BNB balance...</div>
       <div class="progress-bar">
@@ -81,10 +87,16 @@
 
     <p>Then fill out this form to receive your airdrop:</p>
     <a class="button" href="https://forms.gle/vvSKYqGi2Rrc1acu7" target="_blank">📬 Submit Your Info</a>
-    <p>🟡 Total supply: 1,000,000 $NUKEX<br>🔒 80% will be added to liquidity<br>🌐 LP will be locked via PinkLock</p>
-    <p>📦 Contributors receive a share of 100,000 $NUKEX as airdrop </p>
+
+    <p>🟡 Total supply: 1,000,000 $NUKEX<br>
+    🔒 80% will be added to liquidity<br>
+    🌐 LP will be locked via PinkLock</p>
+
+    <p>📦 Contributors receive a share of 100,000 $NUKEX as airdrop</p>
+
     <p>💬 Join our Telegram Group for updates:</p>
     <a href="https://t.me/nukextoken" target="_blank" style="color:#f2a900;">t.me/nukextoken</a>
+
     <p>💬 Join our Telegram Channel for memes & marketing:</p>
     <a href="https://t.me/nukexmemetoken" target="_blank" style="color:#f2a900;">t.me/nukexmemetoken</a>
   </div>
@@ -105,7 +117,7 @@
           `🎯 BNB Raised: ${balanceBNB.toFixed(4)} / ${goalBNB} BNB (${percent}%)`;
         document.getElementById("progress-bar").style.width = `${percent}%`;
       } catch (err) {
-        document.getElementById("bnb-amount").textContent = ⚠️ Error loading BNB balance.";
+        document.getElementById("bnb-amount").textContent = "⚠️ Error loading BNB balance.";
         console.error("Web3 error:", err);
       }
     }
