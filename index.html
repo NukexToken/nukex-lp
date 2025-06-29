@@ -4,27 +4,114 @@
   <meta charset="UTF-8">
   <title>Nukex LP Fundraiser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; background: #0c0c14; color: #eee; text-align: center; padding: 40px; }
-    .container { max-width: 600px; margin: auto; background: #1f1f2e; border-radius: 8px; padding: 20px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #0c0c14;
+      color: #eee;
+      text-align: center;
+      padding: 40px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #1f1f2e;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .logo {
+      max-width: 150px;
+      margin-bottom: 15px;
+    }
     h1 { color: #f2a900; }
-    a.button { display: inline-block; margin: 10px; padding: 15px 25px; background: #f2a900; color: #000; text-decoration: none; font-weight: bold; border-radius: 4px; }
+    a.button {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 25px;
+      background: #f2a900;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+    }
     a.button:hover { background: #f2c347; }
     p { font-size: 1.1em; }
+    .progress-wrapper {
+      margin: 20px 0;
+      text-align: left;
+    }
+    .progress-bar {
+      width: 100%;
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 12px;
+    }
+    .progress {
+      height: 12px;
+      background: #4caf50;
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+    }
+    .progress-info {
+      font-size: 1em;
+      margin-bottom: 5px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- LOGO -->
+    <img class="logo" src="NUKEX.svg" alt="Nukex Logo">
+
     <h1>🚀 Nukex Liquidity Fundraiser</h1>
-    <p>We're raising <strong>1 BNB</strong> (~$650) to create the first PancakeSwap liquidity pool for Nukex!</p>
+    <p>We're raising <strong>1 BNB</strong> to create the first PancakeSwap liquidity pool for Nukex!</p>
     <p><strong>Your help means you join the $NUKEX community early — and get rewarded!</strong></p>
-    <p>✅ Send your contribution to:</p>
+    <p>✅ Send your BNB contribution to:</p>
     <code>0x61D23523881E46fD6cD37008aAD55E726F3A828b</code>
+
+    <!-- Progress Bar Section -->
+    <div class="progress-wrapper">
+      <div class="progress-info" id="bnb-amount">Loading BNB balance...</div>
+      <div class="progress-bar">
+        <div class="progress" id="progress-bar"></div>
+      </div>
+    </div>
+
     <p>Then fill out this form to receive your airdrop:</p>
     <a class="button" href="https://forms.gle/vvSKYqGi2Rrc1acu7" target="_blank">📬 Submit Your Info</a>
     <p>🟡 Total supply: 1,000,000 $NUKEX<br>🔒 80% will be added to liquidity<br>🌐 LP will be locked via PinkLock</p>
-    <p>💬 Join our Telegram for updates:</p>
+    <p>📦 Contributors receive a share of 100,000 $NUKEX as airdrop </p>
+    <p>💬 Join our Telegram Group for updates:</p>
     <a href="https://t.me/nukextoken" target="_blank" style="color:#f2a900;">t.me/nukextoken</a>
+    <p>💬 Join our Telegram Channel for memes & marketing:</p>
+    <a href="https://t.me/nukexmemetoken" target="_blank" style="color:#f2a900;">t.me/nukexmemetoken</a>
   </div>
+
+  <script>
+    const walletAddress = "0x61D23523881E46fD6cD37008aAD55E726F3A828b";
+    const goalBNB = 1.0;
+
+    const web3 = new Web3("https://bsc-dataseed.binance.org/");
+
+    async function updateBNBProgress() {
+      try {
+        const balanceWei = await web3.eth.getBalance(walletAddress);
+        const balanceBNB = parseFloat(web3.utils.fromWei(balanceWei, "ether"));
+        const percent = Math.min((balanceBNB / goalBNB) * 100, 100).toFixed(2);
+
+        document.getElementById("bnb-amount").textContent =
+          `🎯 BNB Raised: ${balanceBNB.toFixed(4)} / ${goalBNB} BNB (${percent}%)`;
+        document.getElementById("progress-bar").style.width = `${percent}%`;
+      } catch (err) {
+        document.getElementById("bnb-amount").textContent = ⚠️ Error loading BNB balance.";
+        console.error("Web3 error:", err);
+      }
+    }
+
+    updateBNBProgress();
+    setInterval(updateBNBProgress, 15000); // Refresh every 15 seconds
+  </script>
 </body>
 </html>
